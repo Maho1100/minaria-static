@@ -6,13 +6,15 @@ export default function Stage1() {
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState(null);
   const [progress, setProgress] = useState(() => loadProgress());
-
+ 
   useEffect(() => {
-    fetch("/data/questions.json")
-      .then((r) => r.json())
-      .then(setData)
-      .catch((e) => console.error(e));
-  }, []);
+  const url = new URL("data/questions.json", import.meta.env.BASE_URL).toString();
+
+  fetch(url)
+    .then((r) => r.json())
+    .then(setData)
+    .catch((e) => console.error("questions.json fetch failed:", e));
+}, []);
 
   const stage = useMemo(() => {
     if (!data) return null;
