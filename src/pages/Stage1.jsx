@@ -7,21 +7,20 @@ export default function Stage1() {
   const [picked, setPicked] = useState(null);
   const [progress, setProgress] = useState(() => loadProgress());
   const [fetchError, setFetchError] = useState(null);
-
+  
   useEffect(() => {
-    const url = new URL("data/questions.json", import.meta.env.BASE_URL).toString();
+  fetch("./data/questions.json")
+    .then((r) => {
+      if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText}`);
+      return r.json();
+    })
+    .then(setData)
+    .catch((e) => {
+      console.error("questions.json fetch failed:", e);
+      setFetchError(String(e));
+    });
+}, []);
 
-    fetch(url)
-      .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText}`);
-        return r.json();
-      })
-      .then(setData)
-      .catch((e) => {
-        console.error("questions.json fetch failed:", e);
-        setFetchError(String(e));
-      });
-  }, []);
 
   // ---- ここから「落ちないガード」(原因を画面に出す) ----
   if (fetchError) {
