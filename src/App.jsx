@@ -1,5 +1,6 @@
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
 import Stage1 from "./pages/Stage1.jsx";
+import ErrorBoundary from "./ErrorBoundary.jsx";
 
 function Home() {
   return (
@@ -12,12 +13,13 @@ function Home() {
 
 export default function App() {
   return (
-    <HashRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/stage1" element={<Stage1 />} />
-      </Routes>
-    </HashRouter>
+    <ErrorBoundary>
+      <HashRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/stage1" element={<Stage1 />} />
+        </Routes>
+      </HashRouter>
+    </ErrorBoundary>
   );
 }
-
