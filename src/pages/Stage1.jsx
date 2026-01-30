@@ -8,31 +8,27 @@ export default function Stage1() {
   const [progress, setProgress] = useState(() => loadProgress());
   const [fetchError, setFetchError] = useState(null);
 
+  // questions.json 読み込み（GitHub Pages / ローカル両対応）
   useEffect(() => {
-    // GitHub Pages / ローカル両対応（BASE_URL不要）
     fetch("./data/questions.json")
       .then((r) => {
-        if (!r.ok) throw new Error(`HTTP ${r.status} ${r.statusText}`);
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
         return r.json();
       })
       .then(setData)
-      .catch((e) => {
-        console.error("questions.json fetch failed:", e);
-        setFetchError(String(e));
-      });
+      .catch((e) => setFetchError(String(e)));
   }, []);
 
-  // ★ hooks は「常に」呼ばれる位置に置く（条件returnより前に置かない）
+  // Hooks は必ず毎回同じ順番で呼ぶ
   const stage = useMemo(() => {
-    if (!data || !data.stages || !Array.isArray(data.stages)) return null;
+    if (!data || !Array.isArray(data.stages)) return null;
     return data.stages.find((s) => s.stageId === "stage1") || null;
   }, [data]);
 
   const q = stage?.questions?.[idx];
 
   function choose(choiceIndex) {
-    if (!q) return;
-    if (picked !== null) return;
+    if (!q || picked !== null) return;
     setPicked(choiceIndex);
 
     const isCorrect = choiceIndex === q.answerIndex;
@@ -55,39 +51,17 @@ export default function Stage1() {
     setIdx((v) => v + 1);
   }
 
-  // ---- ここから表示ガード（hooksの後なのでOK） ----
+  // ===== 表示ガード =====
   if (fetchError) {
-    return (
-      <div style={{ padding: 16 }}>
-        <h2>データ読み込みエラー</h2>
-        <p>{fetchError}</p>
-      </div>
-    );
+    return <div style={{ padding: 16 }}>読み込みエラー: {fetchError}</div>;
   }
 
   if (!data) {
     return <div style={{ padding: 16 }}>読み込み中…</div>;
   }
 
-  if (!data.stages || !Array.isArray(data.stages)) {
-    return (
-      <div style={{ padding: 16 }}>
-        <h2>エラー：stages が見つかりません</h2>
-        <pre style={{ whiteSpace: "pre-wrap" }}>{JSON.stringify(data, null, 2)}</pre>
-      </div>
-    );
-  }
-
   if (!stage) {
-    return (
-      <div style={{ padding: 16 }}>
-        <h2>エラー：stage1 が見つかりません</h2>
-        <p>stageId 一覧：</p>
-        <pre style={{ whiteSpace: "pre-wrap" }}>
-          {JSON.stringify(data.stages.map((s) => s.stageId), null, 2)}
-        </pre>
-      </div>
-    );
+    return <div style={{ padding: 16 }}>Stage1 が見つかりません</div>;
   }
 
   if (!q) {
@@ -99,7 +73,7 @@ export default function Stage1() {
       </div>
     );
   }
-  // ---- ここまで表示ガード ----
+  // =====================
 
   const isCorrect = picked === q.answerIndex;
 
