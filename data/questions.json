@@ -15,37 +15,34 @@
         {
           "id": "s1-q2",
           "type": "mcq",
-          "prompt": "リンクを作るタグはどれ？",
-          "choices": ["<a>", "<link>", "<href>", "<url>"],
-          "answerIndex": 0,
-          "explanation": "<a> タグでリンクを作ります。href属性にURLを入れます。"
+          "prompt": "HTMLでリンクを作るタグは？",
+          "choices": ["<link>", "<a>", "<href>", "<url>"],
+          "answerIndex": 1,
+          "explanation": "<a> タグでリンクを作ります。"
+        }
+      ]
+    },
+    {
+      "stageId": "stage2",
+      "title": "Stage 2: CSS基礎",
+      "questions": [
+        {
+          "id": "s2-q1",
+          "type": "mcq",
+          "prompt": "文字色を赤にするCSSプロパティは？",
+          "choices": ["font-color", "color", "text-color", "background-color"],
+          "answerIndex": 1,
+          "explanation": "文字色は color プロパティで指定します。"
         },
         {
-          "id": "s1-q3",
+          "id": "s2-q2",
           "type": "mcq",
-          "prompt": "画像を表示するタグはどれ？",
-          "choices": ["<img>", "<image>", "<pic>", "<media>"],
-          "answerIndex": 0,
-          "explanation": "<img> で画像を表示します。src属性が必須です。"
-        },
-        {
-          "id": "s1-q4",
-          "type": "mcq",
-          "prompt": "見出しの中で一番大きいのは？",
-          "choices": ["<h6>", "<h3>", "<h2>", "<h1>"],
-          "answerIndex": 3,
-          "explanation": "<h1> が最上位の見出しです。"
-        },
-        {
-          "id": "s1-q5",
-          "type": "mcq",
-          "prompt": "改行を表すタグはどれ？",
-          "choices": ["<br>", "<lb>", "<newline>", "<line>"],
-          "answerIndex": 0,
-          "explanation": "<br> は改行（line break）です。"
+          "prompt": "要素の外側の余白を指定するのは？",
+          "choices": ["padding", "border", "margin", "gap"],
+          "answerIndex": 2,
+          "explanation": "margin は要素の外側の余白です。"
         }
       ]
     }
   ]
 }
-
