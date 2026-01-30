@@ -1,16 +1,57 @@
-# React + Vite
+# Minaria Static
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Minaria Static は、プログラミング初学者向けの  
+**完全クライアントサイド型・学習ゲーム教材**です。
 
-Currently, two official plugins are available:
+ブラウザで URL を開くだけで学習を開始でき、  
+サーバー起動やログインを必要としません。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 特徴
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ブラウザのみで動作（サーバーレス）
+- 問題データは JSON ファイルで管理
+- 学習進捗は localStorage に保存
+- GitHub Pages で公開可能
+- スマホ・PC 両対応
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 公開URL
+
+- Home  
+  https://maho1100.github.io/minaria-static/
+
+- Stage1  
+  https://maho1100.github.io/minaria-static/#/stage1
+
+---
+
+## 対象ユーザー
+
+- プログラミング初学者
+- 小学生〜中学生
+- 教育者・保護者による利用も想定
+
+---
+
+## 使い方（学習者）
+
+1. 上記URLをブラウザで開く
+2. Stageを選択
+3. 問題に答える
+4. 正解すると XP が増える
+5. 進捗は自動保存される（次回も続きから）
+
+※ 学習データは利用者の端末内にのみ保存されます。
+
+---
+
+## 開発者向け
+
+### ローカル起動
+
+```bash
+npm install
+npm run dev
